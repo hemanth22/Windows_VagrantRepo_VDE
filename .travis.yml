@@ -1,5 +1,11 @@
 sudo: required
 language: bash
+env:
+  global:
+#  - USER="hemanth22"
+#  - EMAIL="hemanth22hemu@mail.com"
+#  - REPO="Pre-Release_hemanthindexpage"
+  - GH_REPO="github.com/${USER}/${DEST_REPO}.git"
 
 before_install:
   - sudo apt-get -y install gcc make linux-headers-$(uname -r) dkms
@@ -14,13 +20,21 @@ before_install:
   - sudo apt-get install -y vagrant
   - sudo apt-get install -y pandoc
   - gem install asciidoctor
-  - vagrant box add windows107 https://vagrantcloud.com/truongdo/boxes/win10vs17/versions/0.1.0/providers/virtualbox.box
+  - mkdir backup
+  - vagrant package --base truongdo/win10vs17 --output base truongdo/win10vs17.box --vagrantfile backup/Vagrantfile
+  - vagrant box add base truongdo/win10vs17 https://app.vagrantup.com/truongdo/boxes/win10vs17
+#  - vagrant box add windows107 https://vagrantcloud.com/truongdo/boxes/win10vs17/versions/0.1.0/providers/virtualbox.box
 
 script:
    - git clone https://github.com/hemanth22/Windows_VagrantRepo_VDE.git
 
 after_success:
- - push.sh
+ - git remote
+ - git config user.email ${EMAIL}
+ - git config user.name ${USER}
+ - git add .
+ - git commit -m "Deployment process using deployer repository from Travis build  $TRAVIS_BUILD_NUMBER"
+ - git push "https://${GITHUB_API_KEY}@${GH_REPO}" master
 
 notifications:
   slack:
