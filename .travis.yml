@@ -2,7 +2,7 @@ sudo: required
 language: bash
 
 before_install:
-  - sudo apt-get install -y update
+  - sudo apt-get -y update
   - sudo apt-get install -y git
   - sudo apt-get install -y virtualbox-4.3
   - sudo apt-get install -y install vagrant
