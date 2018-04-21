@@ -17,7 +17,7 @@ before_install:
   - vagrant box add windows107 https://vagrantcloud.com/truongdo/boxes/win10vs17/versions/0.1.0/providers/virtualbox.box
 
 script:
-   - git clone https://github.com/hemanth22/Pre-Release_hemanthindexpage.git
+   - git clone https://github.com/hemanth22/Windows_VagrantRepo_VDE.git
 
 after_success:
  - push.sh
