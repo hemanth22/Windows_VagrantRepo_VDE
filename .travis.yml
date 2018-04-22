@@ -20,13 +20,10 @@ before_install:
   - sudo apt-get install -y vagrant
   - sudo apt-get install -y pandoc
   - gem install asciidoctor
-  - mkdir backup
-  - vagrant package --base truongdo/win10vs17 --output base truongdo/win10vs17.box --vagrantfile backup/Vagrantfile
-  - vagrant box add base truongdo/win10vs17 https://app.vagrantup.com/truongdo/boxes/win10vs17
-#  - vagrant box add windows107 https://vagrantcloud.com/truongdo/boxes/win10vs17/versions/0.1.0/providers/virtualbox.box
 
 script:
-   - git clone https://github.com/hemanth22/Windows_VagrantRepo_VDE.git
+   - sudo vagrant box add windows107 https://vagrantcloud.com/truongdo/boxes/win10vs17/versions/0.1.0/providers/virtualbox.box
+   - sudo cp -rf ~/.vagrant.d/boxes/ /home/travis/build/hemanth22/Windows_VagrantRepo_VDE
 
 after_success:
  - git remote
